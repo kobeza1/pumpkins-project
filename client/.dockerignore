@@ -1,5 +1,8 @@
 *
 !src
+!dist
 !package.json
 !package-lock.json
 !tsconfig.json
+!webpack.config.js
+!public
