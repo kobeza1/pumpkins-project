@@ -1,0 +1,14 @@
+{
+    "name": "client",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "echo 'Hello, world!'"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "typescript": "^5.0.4"
+    }
+}
