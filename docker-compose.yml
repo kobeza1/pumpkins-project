@@ -27,6 +27,6 @@ services:
         build:
             context: ./client
         ports:
-            - "80:80"
+            - "8888:8888"
         depends_on:
             - backend
