@@ -4,6 +4,8 @@
         "outDir": "./dist",
         "target": "ESNext",
         "module": "ESNext",
+        "jsx": "react",
+        "allowJs": true,
         "moduleResolution": "nodenext",
         "sourceMap": true,
         "esModuleInterop": true,
