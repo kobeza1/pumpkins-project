@@ -1,16 +1,12 @@
-const express = require("express");
+import express from "express";
+import { user as ctrl } from "../../controllers/index.js";
+import { ctrlWrapper } from "../../helpers/index.js";
+import { auth, upload, validation } from "../../middlewares/index.js";
+import { userUpdateSchema } from "../../models/user.js";
+
 const router = express.Router();
 
-const { user: ctrl } = require("../../controllers");
-
-const { validation, auth, upload } = require("../../middlewares");
-
-const { ctrlWrapper } = require("../../helpers");
-
-const { userUpdateSchema } = require("../../models/user");
-
 router.get("/currentUser", auth, ctrlWrapper(ctrl.getCurrentUser));
-router.get("/userData", auth, ctrlWrapper(ctrl.getUserData));
 
 router.patch(
     "/changeData",
@@ -20,4 +16,4 @@ router.patch(
     ctrlWrapper(ctrl.changeData)
 );
 
-module.exports = router;
+export default router;

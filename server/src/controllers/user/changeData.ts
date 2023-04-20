@@ -1,15 +1,10 @@
-const { User } = require("../../models");
-const { cloudinaryImgUpload } = require("../../helpers");
-const cloudinary = require("cloudinary").v2;
+import { v2 as cloudinaryV2 } from "cloudinary";
+import { Response } from "express";
+import { cloudinaryImgUpload } from "../../helpers/index.js";
+import { RequestWithUser } from "../../middlewares/auth.js";
+import { User, UserModel } from "../../models/index.js";
 
-const changeData = async (
-    req: {
-        file: {};
-        body: { email: String; name: String; phone: string };
-        user: { _id: String };
-    },
-    res: { status: Function }
-) => {
+export const changeData = async (req: RequestWithUser, res: Response) => {
     let userAvatarURL = null;
     let userIdCloudAvatar = null;
 
@@ -21,18 +16,18 @@ const changeData = async (
 
     const { email, name, phone } = req.body;
     const { _id } = req.user;
-    let result;
-    result = await User.findByIdAndUpdate(_id, req.body, { new: true });
+    let result: User | null;
+    result = await UserModel.findByIdAndUpdate(_id, req.body, { new: true });
 
     if (userAvatarURL) {
-        const user = await User.findOne({ _id });
+        const user = await UserModel.findOne({ _id });
         if (user.idCloudAvatar) {
-            await cloudinary.uploader.destroy(user.idCloudAvatar, {
-                folder: "images",
+            await cloudinaryV2.uploader.destroy(user.idCloudAvatar, {
+                // folder: "images",
             });
         }
 
-        result = await User.findByIdAndUpdate(
+        result = await UserModel.findByIdAndUpdate(
             _id,
             { avatarURL: userAvatarURL, idCloudAvatar: userIdCloudAvatar },
             { new: true }
@@ -48,5 +43,3 @@ const changeData = async (
         },
     });
 };
-
-module.exports = changeData;

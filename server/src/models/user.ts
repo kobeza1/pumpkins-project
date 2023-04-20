@@ -1,7 +1,7 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+import Joi from "joi";
+import { Schema, model } from "mongoose";
 
-const userSchema = Schema(
+const userSchema = new Schema(
     {
         email: {
             type: String,
@@ -36,7 +36,19 @@ const userSchema = Schema(
     { versionKey: false, timestamps: true }
 );
 
-const joiRegisterSchema = Joi.object({
+export interface User {
+    _id: string;
+    email: string;
+    password: string;
+    name: string;
+    phone: string;
+    token?: string;
+    idCloudAvatar?: string;
+}
+
+interface UserLogin extends Pick<User, "email" | "password"> {}
+
+export const joiRegisterSchema = Joi.object<User>({
     email: Joi.string().min(7).max(63).email().required(),
     password: Joi.string()
         .trim(true)
@@ -51,12 +63,12 @@ const joiRegisterSchema = Joi.object({
         .required(),
 });
 
-const joiLoginSchema = Joi.object({
+export const joiLoginSchema = Joi.object<UserLogin>({
     email: Joi.string().min(7).max(63).email().required(),
     password: Joi.string().required(),
 });
 
-const userUpdateSchema = Joi.object({
+export const userUpdateSchema = Joi.object<User>({
     name: Joi.string(),
     email: Joi.string().min(7).max(63).email(),
     phone: Joi.string()
@@ -65,11 +77,4 @@ const userUpdateSchema = Joi.object({
     password: Joi.string().trim(true).min(7).max(32).pattern(/^\S*$/),
 });
 
-const User = model("user", userSchema);
-
-module.exports = {
-    User,
-    joiRegisterSchema,
-    joiLoginSchema,
-    userUpdateSchema,
-};
+export const UserModel = model<User>("user", userSchema);

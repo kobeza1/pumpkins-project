@@ -1,5 +1,5 @@
-const app = require("./app");
-const { connectMongo } = require("./db/connection");
+import { app } from "./app.js";
+import { connectMongo } from "./db/connection.js";
 
 const { PORT = 3000 } = process.env;
 

@@ -1,17 +1,10 @@
-const express = require("express");
+import express from "express";
+import { auth as ctrl } from "../../controllers/index.js";
+import { ctrlWrapper } from "../../helpers/index.js";
+import { auth, validation } from "../../middlewares/index.js";
+import { joiLoginSchema, joiRegisterSchema } from "../../models/user.js";
+
 const router = express.Router();
-
-const { auth: ctrl } = require("../../controllers");
-
-const { validation, auth, upload } = require("../../middlewares");
-
-const { ctrlWrapper } = require("../../helpers");
-
-const {
-    joiRegisterSchema,
-    joiLoginSchema,
-    userUpdateSchema,
-} = require("../../models/user");
 
 router.post(
     "/register",
@@ -21,14 +14,6 @@ router.post(
 
 router.post("/login", validation(joiLoginSchema), ctrlWrapper(ctrl.login));
 
-router.patch(
-    "/changeData",
-    auth,
-    upload.single("image"),
-    validation(userUpdateSchema),
-    ctrlWrapper(ctrl.changeData)
-);
-
 router.get("/logout", auth, ctrlWrapper(ctrl.logout));
 
-module.exports = router;
+export default router;

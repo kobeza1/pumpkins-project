@@ -1,18 +1,17 @@
-const { User } = require("../../models");
-const HttpError = require("../../helpers");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+import bcrypt from "bcryptjs";
+import { config } from "dotenv";
+import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import { HttpError } from "../../helpers/index.js";
+import { UserModel } from "../../models/index.js";
+
+config();
 
 const { SECRET_KEY } = process.env;
 
-const login = async (
-    req: { body: { email: String; password: String } },
-    res: { json: Function }
-) => {
+export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
-    const user: { password: String; _id: String; name: String; email: String } =
-        await User.findOne({ email });
+    const user = await UserModel.findOne({ email });
     if (!user) {
         throw HttpError(409, "There is no user with such date");
     }
@@ -26,7 +25,7 @@ const login = async (
     };
 
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
-    await User.findByIdAndUpdate(user._id, { token });
+    await UserModel.findByIdAndUpdate(user._id, { token });
 
     res.json({
         status: "success",
@@ -39,5 +38,3 @@ const login = async (
         },
     });
 };
-
-module.exports = login;

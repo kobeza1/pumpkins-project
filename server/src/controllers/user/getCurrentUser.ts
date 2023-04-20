@@ -1,4 +1,4 @@
-const getCurrentUser = (
+export const getCurrentUser = (
     req: { user: { _id: String; name: String; email: String } },
     res: { json: Function }
 ) => {
@@ -12,5 +12,3 @@ const getCurrentUser = (
         },
     });
 };
-
-module.exports = getCurrentUser;
