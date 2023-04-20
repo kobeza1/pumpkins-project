@@ -1,5 +1,5 @@
-import express from "express";
-import bodyParser from "body-parser";
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const logger = require("morgan");
 const cors = require("cors");
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 
-app.use((req, res) => {
+app.use((req: {}, res: { status: Function }) => {
     res.status(404).json({ message: "Not found" });
 });
 
