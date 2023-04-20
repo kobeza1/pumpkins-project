@@ -1,4 +1,3 @@
-const { User } = require("./user");
-const { UserPumpkins } = require("./userPumpkins");
+import { UserModel, type User } from "./user.js";
 
-module.exports = { User, UserPumpkins };
+export { UserModel, User };

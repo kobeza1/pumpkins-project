@@ -1,38 +1,36 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+import bodyParser from "body-parser"; // TODO: remove ?
+import cors from "cors";
+import { config } from "dotenv";
+import express, { Request, Response } from "express";
+import logger from "morgan";
+import { authRouter, userRouter } from "./routes/api/index.js";
 
-const logger = require("morgan");
-const cors = require("cors");
-require("dotenv").config();
+import "./server.js";
 
-const { authRouter, userRouter } = require("./routes/api");
+config();
 
 const app = express();
-app.use(bodyParser.json());
-
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+
+app.use(bodyParser.json());
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.get("/", (_req, res) => {
+    res.status(200).json({ message: "Hello World!" });
+});
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 
-app.use((req: {}, res: { status: Function }) => {
+app.use((_req, res) => {
     res.status(404).json({ message: "Not found" });
 });
 
-app.use(
-    (
-        err: { status: Number; message: String },
-        req: {},
-        res: { status: any },
-        next: any
-    ) => {
-        const { status = 500 } = err;
-        res.status(status).json({ message: err.message });
-    }
-);
+app.use((err: any, _req: Request, res: Response) => {
+    const { status = 500 } = err;
+    res.status(status).json({ message: err.message });
+});
 
-module.exports = app;
+export { app };

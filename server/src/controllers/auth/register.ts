@@ -1,17 +1,15 @@
-const { User } = require("../../models");
-const gravatar = require("gravatar");
-require("dotenv").config();
-const bcrypt = require("bcryptjs");
-const { HttpError } = require("../../helpers");
+import bcrypt from "bcryptjs";
+import { config } from "dotenv";
+import { Request, Response } from "express";
+import gravatar from "gravatar";
+import { HttpError } from "../../helpers/index.js";
+import { UserModel } from "../../models/index.js";
 
-const register = async (
-    req: {
-        body: { password: String; email: String; phone: String; name: String };
-    },
-    res: { json: any }
-) => {
+config();
+
+export const register = async (req: Request, res: Response) => {
     const { password, email, name, phone } = req.body;
-    const user = await User.findOne({ email });
+    const user = await UserModel.findOne({ email });
 
     if (user) {
         throw HttpError(409, "Provided email already exists");
@@ -20,7 +18,7 @@ const register = async (
     const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     const avatarURL = gravatar.url(email);
 
-    const newUser = await User.create({
+    const newUser = await UserModel.create({
         password: hashPassword,
         email,
         name,
@@ -38,5 +36,3 @@ const register = async (
         },
     });
 };
-
-module.exports = register;

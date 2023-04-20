@@ -1,12 +1,10 @@
-const { User } = require("../../models");
+import { UserModel } from "../../models/index.js";
 
-const logout = async (
+export const logout = async (
     req: { user: { _id: String } },
     res: { status: Function }
 ) => {
     const { _id } = req.user;
-    await User.findByIdAndUpdate(_id, { token: null });
+    await UserModel.findByIdAndUpdate(_id, { token: null });
     res.status(204).json();
 };
-
-module.exports = logout;

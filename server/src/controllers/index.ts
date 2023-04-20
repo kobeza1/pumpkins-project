@@ -1,4 +1,4 @@
-const auth = require("./auth");
-const user = require("./user");
+import * as auth from "./auth/index.js";
+import * as user from "./user/index.js";
 
-module.exports = { auth, user };
+export { auth, user };

@@ -1,15 +1,21 @@
-const { User } = require("../models");
-const { HttpError } = require("../helpers");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+import { config } from "dotenv";
+import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import { HttpError } from "../helpers/index.js";
+import { User, UserModel } from "../models/index.js";
 
-dotenv.config();
+config();
 
 const { SECRET_KEY } = process.env;
-const auth = async (
-    req: { headers: { authorization: String }; user: {} },
-    res: {},
-    next: Function
+
+export interface RequestWithUser extends Request {
+    user: User;
+}
+
+export const auth = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
 ) => {
     const { authorization = "" } = req.headers;
     const [bearer, token] = authorization.split(" ");
@@ -20,9 +26,9 @@ const auth = async (
         next(HttpError(401, "Not authorized"));
     }
     try {
-        const { id } = jwt.verify(token, SECRET_KEY);
+        const { id } = jwt.verify(token, SECRET_KEY) as jwt.JwtPayload;
 
-        const user = await User.findById(id);
+        const user = await UserModel.findById(id);
 
         if (!user || !user.token) {
             next(HttpError(401, "Not authorized"));
@@ -37,5 +43,3 @@ const auth = async (
         next(error);
     }
 };
-
-module.exports = auth;

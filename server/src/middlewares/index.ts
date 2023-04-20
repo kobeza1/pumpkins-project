@@ -1,5 +1,5 @@
-const auth = require("./auth");
+import { auth } from "./auth.js";
+import { upload } from "./upload.js";
+import { validation } from "./validation.js";
 
-module.exports = {
-    auth,
-};
+export { auth, upload, validation };

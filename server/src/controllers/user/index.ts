@@ -1,5 +1,4 @@
-const getCurrentUser = require("./getCurrentUser");
-const getUserData = require("./getUserData");
-const changeData = require("./changeData");
+import { changeData } from "./changeData.js";
+import { getCurrentUser } from "./getCurrentUser.js";
 
-module.exports = { changeData, getCurrentUser, getUserData };
+export { changeData, getCurrentUser };
