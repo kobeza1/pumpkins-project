@@ -6,6 +6,7 @@ import {
     joiLoginSchema,
     joiRegisterSchema,
     joiVerifyEmailSchema,
+    joiRefreshSchema,
 } from "../../models/user.js";
 
 const router = express.Router();
@@ -24,6 +25,12 @@ router.post(
 );
 
 router.post("/login", validation(joiLoginSchema), ctrlWrapper(ctrl.login));
+
+router.post(
+    "/refresh",
+    validation(joiRefreshSchema),
+    ctrlWrapper(ctrl.refresh)
+);
 
 router.get("/logout", auth, ctrlWrapper(ctrl.logout));
 

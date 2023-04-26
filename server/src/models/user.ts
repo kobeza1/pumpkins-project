@@ -40,6 +40,14 @@ const userSchema = new Schema(
             type: String,
             required: [true, "Verify token is required"],
         },
+        accessToken: {
+            type: String,
+            default: null,
+        },
+        refreshToken: {
+            type: String,
+            default: null,
+        },
     },
     { versionKey: false, timestamps: true }
 );
@@ -54,6 +62,8 @@ export interface User {
     idCloudAvatar?: string;
     verify: boolean;
     verificationToken: string;
+    accessToken: string;
+    refreshToken: string;
 }
 
 interface UserLogin extends Pick<User, "email" | "password"> {}
@@ -88,6 +98,9 @@ export const userUpdateSchema = Joi.object<User>({
         .length(13)
         .pattern(/^\+[380]{3}\d{7}/),
     password: Joi.string().trim(true).min(7).max(32).pattern(/^\S*$/),
+});
+export const joiRefreshSchema = Joi.object({
+    refreshToken: Joi.string().required(),
 });
 
 export const UserModel = model<User>("user", userSchema);
