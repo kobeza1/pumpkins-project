@@ -19,6 +19,9 @@ export const login = async (req: Request, res: Response) => {
     if (!passCompare) {
         throw HttpError(401, "Password is wrong");
     }
+    if (!user.verify) {
+        throw HttpError(403, " Email is not verified");
+    }
 
     const payload = {
         id: user._id,
