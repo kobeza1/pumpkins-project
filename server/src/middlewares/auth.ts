@@ -6,7 +6,7 @@ import { User, UserModel } from "../models/index.js";
 
 config();
 
-const { SECRET_KEY } = process.env;
+const { ACCESS_SECRET_KEY } = process.env;
 
 export interface RequestWithUser extends Request {
     user: User;
@@ -25,12 +25,13 @@ export const auth = async (
     if (!token) {
         next(HttpError(401, "Not authorized"));
     }
+
     try {
-        const { id } = jwt.verify(token, SECRET_KEY) as jwt.JwtPayload;
+        const { id } = jwt.verify(token, ACCESS_SECRET_KEY) as jwt.JwtPayload;
 
         const user = await UserModel.findById(id);
 
-        if (!user || !user.token) {
+        if (!user || !user.accessToken) {
             next(HttpError(401, "Not authorized"));
         }
         req.user = user;

@@ -7,7 +7,7 @@ import { UserModel } from "../../models/index.js";
 
 config();
 
-const { SECRET_KEY } = process.env;
+const { ACCESS_SECRET_KEY, REFRESH_SECRET_KEY } = process.env;
 
 export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -27,13 +27,19 @@ export const login = async (req: Request, res: Response) => {
         id: user._id,
     };
 
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
-    await UserModel.findByIdAndUpdate(user._id, { token });
+    const accessToken = jwt.sign(payload, ACCESS_SECRET_KEY, {
+        expiresIn: "3m",
+    });
+    const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, {
+        expiresIn: "7d",
+    });
+    await UserModel.findByIdAndUpdate(user._id, { accessToken, refreshToken });
 
     res.json({
         status: "success",
         code: 200,
-        token,
+        accessToken,
+        refreshToken,
         user: {
             id: user._id,
             name: user.name,
