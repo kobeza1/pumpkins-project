@@ -32,6 +32,14 @@ const userSchema = new Schema(
             type: String,
             default: null,
         },
+        verify: {
+            type: Boolean,
+            default: false,
+        },
+        verificationToken: {
+            type: String,
+            required: [true, "Verify token is required"],
+        },
     },
     { versionKey: false, timestamps: true }
 );
@@ -44,6 +52,8 @@ export interface User {
     phone: string;
     token?: string;
     idCloudAvatar?: string;
+    verify: boolean;
+    verificationToken: string;
 }
 
 interface UserLogin extends Pick<User, "email" | "password"> {}
@@ -61,6 +71,9 @@ export const joiRegisterSchema = Joi.object<User>({
         .length(13)
         .pattern(/^\+[380]{3}\d{7}/)
         .required(),
+});
+export const joiVerifyEmailSchema = Joi.object({
+    email: Joi.string().required(),
 });
 
 export const joiLoginSchema = Joi.object<UserLogin>({
