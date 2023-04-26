@@ -10,7 +10,16 @@ export const sendEmail = async (data: MailDataRequired) => {
         const email: MailDataRequired = {
             ...data,
         };
-        await sgMail.send(email);
+        await sgMail.send(email).then(
+            () => {},
+            (error) => {
+                console.error(error);
+
+                if (error.response) {
+                    console.error(error.response.body);
+                }
+            }
+        );
         return true;
     } catch (error) {
         throw error;
