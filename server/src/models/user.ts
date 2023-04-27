@@ -18,7 +18,6 @@ const userSchema = new Schema(
         },
         phone: {
             type: String,
-            required: [true, "Phone number is required"],
         },
         token: {
             type: String,
@@ -26,7 +25,6 @@ const userSchema = new Schema(
         },
         avatarURL: {
             type: String,
-            required: true,
         },
         idCloudAvatar: {
             type: String,
@@ -38,7 +36,6 @@ const userSchema = new Schema(
         },
         verificationToken: {
             type: String,
-            required: [true, "Verify token is required"],
         },
         accessToken: {
             type: String,
@@ -65,6 +62,8 @@ export interface User {
     accessToken: string;
     refreshToken: string;
 }
+
+export interface GoogleUser extends Pick<User, "email" | "password" | "name"> {}
 
 interface UserLogin extends Pick<User, "email" | "password"> {}
 
