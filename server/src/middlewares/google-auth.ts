@@ -1,5 +1,10 @@
 import passport from "passport";
-import { Strategy } from "passport-google-oauth2";
+import {
+    Strategy,
+    StrategyOptionsWithRequest,
+    VerifyFunctionWithRequest,
+    VerifyFunctionWithRequestAndParams,
+} from "passport-google-oauth2";
 import { config } from "dotenv";
 import { UserModel } from "../models/user.js";
 import bcrypt from "bcryptjs";
@@ -9,14 +14,14 @@ config();
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, BASE_URL } = process.env;
 
-const googleParams = {
+const googleParams: StrategyOptionsWithRequest = {
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: `${BASE_URL}/auth/google/callback`,
     passReqToCallback: true,
 };
 
-const googleCallback = async (
+const googleCallback: VerifyFunctionWithRequest = async (
     _req,
     _accessToken,
     _refreshToken,
