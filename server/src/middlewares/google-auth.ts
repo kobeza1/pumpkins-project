@@ -1,14 +1,13 @@
+import bcrypt from "bcryptjs";
+import { config } from "dotenv";
 import passport from "passport";
 import {
     Strategy,
     StrategyOptionsWithRequest,
     VerifyFunctionWithRequest,
-    VerifyFunctionWithRequestAndParams,
 } from "passport-google-oauth2";
-import { config } from "dotenv";
-import { UserModel } from "../models/user.js";
-import bcrypt from "bcryptjs";
 import { v4 } from "uuid";
+import { GoogleUser, UserModel } from "../models/user.js";
 
 config();
 
@@ -34,8 +33,8 @@ const googleCallback: VerifyFunctionWithRequest = async (
         if (user) {
             return done(null, user); // req.user = user
         }
-        const password = bcrypt.hash(v4(), 10);
-        const newUser = await UserModel.create({
+        const password = bcrypt.hashSync(v4(), 10);
+        const newUser = await UserModel.create(<GoogleUser>{
             email,
             password,
             name: displayName,
