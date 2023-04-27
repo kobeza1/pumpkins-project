@@ -1,7 +1,6 @@
 import passport from "passport";
 import { Strategy } from "passport-google-oauth2";
 import { config } from "dotenv";
-import { Request } from "express";
 import { UserModel } from "../models/user.js";
 import bcrypt from "bcryptjs";
 import { v4 } from "uuid";
@@ -13,7 +12,7 @@ const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, BASE_URL } = process.env;
 const googleParams = {
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callback: `${BASE_URL}/auth/google/callback`,
+    callbackURL: `${BASE_URL}/auth/google/callback`,
     passReqToCallback: true,
 };
 

@@ -37,6 +37,9 @@
         "@types/jsonwebtoken": "^9.0.1",
         "@types/morgan": "^1.9.4",
         "@types/multer": "^1.4.7",
+        "@types/passport": "^1.0.12",
+        "@types/passport-google-oauth2": "^0.1.5",
+        "@types/uuid": "^9.0.1",
         "typescript": "^5.0.4"
     }
 }
