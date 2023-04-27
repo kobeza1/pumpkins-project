@@ -1,7 +1,7 @@
 import express from "express";
 import { auth as ctrl } from "../../controllers/index.js";
 import { ctrlWrapper } from "../../helpers/index.js";
-import { auth, validation } from "../../middlewares/index.js";
+import { auth, validation, passport } from "../../middlewares/index.js";
 import {
     joiLoginSchema,
     joiRegisterSchema,
@@ -10,6 +10,17 @@ import {
 } from "../../models/user.js";
 
 const router = express.Router();
+
+router.get(
+    "/google",
+    passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+router.get(
+    "/google/callback",
+    passport.authenticate("google", { session: false }),
+    ctrlWrapper(ctrl.googleAuth)
+);
 
 router.post(
     "/register",
