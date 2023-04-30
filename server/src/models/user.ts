@@ -65,7 +65,7 @@ export interface User {
 
 export interface GoogleUser extends Pick<User, "email" | "password" | "name"> {}
 
-interface UserLogin extends Pick<User, "email" | "password"> {}
+export interface UserLogin extends Pick<User, "email" | "password"> {}
 
 export const joiRegisterSchema = Joi.object<User>({
     email: Joi.string().min(7).max(63).email().required(),
