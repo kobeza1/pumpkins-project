@@ -35,7 +35,7 @@ app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     res.status(status).json({ message: err.message });
 });
 app.listen(PORT, () => {
-    console.log(`Server running. Use our API on port: ${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
 
 export { app };
