@@ -9,7 +9,7 @@ export const changeData = async (req: RequestWithUser, res: Response) => {
     let userIdCloudAvatar = null;
 
     if (req.file) {
-        const { avatarURL, idCloudAvatar } = await cloudinaryImgUpload(req);
+        const { avatarURL, idCloudAvatar } = await cloudinaryImgUpload(req.file);
         userAvatarURL = avatarURL;
         userIdCloudAvatar = idCloudAvatar;
     }
