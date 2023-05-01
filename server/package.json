@@ -5,7 +5,7 @@
     "type": "module",
     "main": "dist/app.js",
     "scripts": {
-        "start": "tsc -w && nodemon dist/app.js"
+        "start": "tsc && nodemon dist/app.js"
     },
     "author": "",
     "license": "ISC",
