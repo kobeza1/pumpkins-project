@@ -30,12 +30,11 @@ export const cloudinaryImgUpload = async (req: Request) => {
                     },
                 });
 
-            await fs.unlink(tempUpload);
-
             return { avatarURL, idCloudAvatar };
         } catch (error: any) {
-            await fs.unlink(tempUpload);
             throw new Error(error.message);
+        } finally {
+            await fs.unlink(tempUpload);
         }
     }
 };
