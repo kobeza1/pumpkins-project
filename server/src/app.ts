@@ -4,7 +4,7 @@ import express, { Request, Response, NextFunction } from "express";
 import logger from "morgan";
 import { authRouter, userRouter, pumpkinRouter } from "./routes/api/index.js";
 
-import "./mongoConnection.js";
+import "./db/connection.js";
 
 config();
 
