@@ -2,7 +2,7 @@ import cors from "cors";
 import { config } from "dotenv";
 import express, { Request, Response, NextFunction } from "express";
 import logger from "morgan";
-import { authRouter, userRouter } from "./routes/api/index.js";
+import { authRouter, userRouter, pumpkinRouter } from "./routes/api/index.js";
 
 import "./mongoConnection.js";
 
@@ -23,6 +23,8 @@ app.get("/", (_req, res) => {
 });
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/pumpkin", pumpkinRouter);
+
 
 app.use((_req, res) => {
     res.status(404).json({ message: "Not found" });
