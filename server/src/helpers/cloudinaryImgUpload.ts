@@ -14,26 +14,24 @@ cloudinaryV2.config({
 });
 
 export const cloudinaryImgUpload = async (file: Express.Multer.File) => {
-    if (file) {
-        const { path: tempUpload } = file;
+    const { path: tempUpload } = file;
 
-        try {
-            const { secure_url: avatarURL, public_id: idCloudAvatar } =
-                await cloudinaryV2.uploader.upload(tempUpload, {
-                    folder: "images",
-                    transformation: {
-                        with: 288,
-                        height: 288,
-                        gravity: "auto",
-                        crop: "fill",
-                    },
-                });
+    try {
+        const { secure_url: avatarURL, public_id: idCloudAvatar } =
+            await cloudinaryV2.uploader.upload(tempUpload, {
+                folder: "images",
+                transformation: {
+                    with: 288,
+                    height: 288,
+                    gravity: "auto",
+                    crop: "fill",
+                },
+            });
 
-            return { avatarURL, idCloudAvatar };
-        } catch (error: any) {
-            throw new Error(error.message);
-        } finally {
-            await fs.unlink(tempUpload);
-        }
+        return { avatarURL, idCloudAvatar };
+    } catch (error: any) {
+        throw new Error(error.message);
+    } finally {
+        await fs.unlink(tempUpload);
     }
 };
