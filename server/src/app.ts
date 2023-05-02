@@ -4,7 +4,7 @@ import express, { Request, Response, NextFunction } from "express";
 import logger from "morgan";
 import { authRouter, userRouter, pumpkinRouter } from "./routes/api/index.js";
 
-import "./mongoConnection.js";
+import "./db/connection.js";
 
 config();
 
@@ -35,7 +35,7 @@ app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     res.status(status).json({ message: err.message });
 });
 app.listen(PORT, () => {
-    console.log(`Server running. Use our API on port: ${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
 
 export { app };
