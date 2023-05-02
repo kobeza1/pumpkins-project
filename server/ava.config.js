@@ -6,4 +6,7 @@ export default {
         },
         compile: "tsc",
     },
+    environmentVariables: {
+        NODE_ENV: "development",
+    },
 };
