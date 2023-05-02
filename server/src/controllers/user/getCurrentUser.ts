@@ -1,7 +1,7 @@
-export const getCurrentUser = (
-    req: { user: { _id: String; name: String; email: String } },
-    res: { json: Function }
-) => {
+import { Response } from "express";
+import { RequestWithUser } from "../../middlewares/auth.js";
+
+export const getCurrentUser = (req: RequestWithUser, res: Response) => {
     const { _id: id, name, email } = req.user;
 
     res.json({
