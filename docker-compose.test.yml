@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+    db_test:
+        image: mongo
+        restart: always
+        env_file:
+            - server/.env
+
+    server_test:
+        build:
+            context: ./server
+        env_file:
+            - server/.env
+        ports:
+            - "3000:3000"
+        environment:
+            - MONGO_URI=${DB_HOST}
+        depends_on:
+            - db
+        command: npm run test
