@@ -17,5 +17,5 @@ services:
         environment:
             - MONGO_URI=${DB_HOST}
         depends_on:
-            - db
+            - db_test
         command: npm run test
