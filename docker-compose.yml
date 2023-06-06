@@ -1,16 +1,6 @@
 version: "3"
 
 services:
-    db:
-        image: mongo
-        restart: always
-        env_file:
-            - server/.env
-        volumes:
-            - "./data:/data/db"
-        ports:
-            - "27017:27017"
-
     server:
         build:
             context: ./server
