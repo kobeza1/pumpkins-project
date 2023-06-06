@@ -8,6 +8,7 @@ import {
     roleMiddleware,
 } from "../../middlewares/index.js";
 import { userUpdateSchema } from "../../models/user.js";
+import { Roles } from "../../models/role.js";
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.get("/currentUser", auth, ctrlWrapper(ctrl.getCurrentUser));
 router.patch(
     "/changeData",
     auth,
-    roleMiddleware(["SUPERADMIN", "USER"]),
+    roleMiddleware([Roles.Superadmin, Roles.User]),
     upload.single("image"),
     validation(userUpdateSchema),
     ctrlWrapper(ctrl.changeData)

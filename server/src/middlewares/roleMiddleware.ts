@@ -13,11 +13,7 @@ export interface RequestWithUser extends Request {
 }
 
 export const roleMiddleware = (roles: String[]) => {
-    const roleList = async (
-        req: RequestWithUser,
-        res: Response,
-        next: NextFunction
-    ) => {
+    return async (req: RequestWithUser, res: Response, next: NextFunction) => {
         const { authorization = "" } = req.headers;
         const [bearer, token] = authorization.split(" ");
         if (bearer !== "Bearer") {
