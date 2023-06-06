@@ -19,12 +19,13 @@ export const login = async (req: Request, res: Response) => {
     if (!passCompare) {
         throw HttpError(401, "Password is wrong");
     }
-    if (!user.verify) {
-        throw HttpError(403, " Email is not verified");
-    }
+    // if (!user.verify) {
+    //     throw HttpError(403, " Email is not verified");
+    // }
 
     const payload = {
         id: user._id,
+        roles: user.roles,
     };
 
     const accessToken = jwt.sign(payload, ACCESS_SECRET_KEY, {
@@ -44,6 +45,7 @@ export const login = async (req: Request, res: Response) => {
             id: user._id,
             name: user.name,
             email: user.email,
+            roles: user.roles,
         },
     });
 };

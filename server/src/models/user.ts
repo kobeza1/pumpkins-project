@@ -45,6 +45,12 @@ const userSchema = new Schema(
             type: String,
             default: null,
         },
+        roles: [
+            {
+                type: String,
+                ref: "Role",
+            },
+        ],
     },
     { versionKey: false, timestamps: true }
 );
@@ -61,6 +67,7 @@ export interface User {
     verificationToken: string;
     accessToken: string;
     refreshToken: string;
+    roles: String[];
 }
 
 export interface GoogleUser extends Pick<User, "email" | "password" | "name"> {}
