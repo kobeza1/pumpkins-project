@@ -6,9 +6,10 @@ module.exports = {
     mode: "development",
     devtool: "inline-source-map",
     devServer: {
-        static: {
-            directory: path.resolve(__dirname, "dist"),
-        },
+        historyApiFallback: true,
+        // static: {
+        //     directory: path.resolve(__dirname, "dist"),
+        // },
         hot: true,
         open: true,
         port: 8888,
@@ -24,6 +25,43 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                        },
+                    },
+                ],
+                include: /\.module\.css$/,
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"],
+                exclude: /\.module\.css$/,
+            },
+            // {
+            //     test: /\.module.css$/,
+            //     use: [
+            //         {
+            //             loader: "css-loader",
+            //             options: {
+            //                 esModule: true, // Говорим о том, что хотим использовать ES Modules
+            //                 modules: {
+            //                     namedExport: true, // Указываем, что предпочитаем именованый экспорт дефолтному
+            //                 },
+            //             },
+            //         },
+            //     ],
+            // },
+            // {
+            //     test: /\.css$/,
+            //     use: ["style-loader", "css-loader"],
+            // },
         ],
     },
     resolve: {

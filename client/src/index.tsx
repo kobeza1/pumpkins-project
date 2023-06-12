@@ -1,6 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
+// import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import { App } from "./components/App";
+import "./index.css";
 
-const App = () => <h1>Hello, 🎃!</h1>;
+const root = document.getElementById("root");
+ReactDOM.createRoot(root!).render(
+    // разобраться с ! в TS
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+);
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// React 17
+// import ReactDOM from "react-dom";
+// ReactDOM.render(<App />, document.getElementById("root"));
