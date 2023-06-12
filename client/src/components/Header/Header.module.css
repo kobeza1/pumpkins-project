@@ -1,0 +1,16 @@
+.header {
+}
+
+.nav__list {
+    display: flex;
+}
+
+.nav__item {
+    &:not(:last-child) {
+        margin-right: 50px;
+    }
+}
+
+.nav__link {
+    font-size: 26px;
+}
