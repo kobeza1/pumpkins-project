@@ -1,9 +1,9 @@
 import { Container } from "../Container/Container";
 
-export const AboutPage = () => {
+export const ShopPage = () => {
     return (
         <Container>
-            <div>AboutPage</div>
+            <div>Shop</div>
         </Container>
     );
 };
