@@ -1,11 +1,12 @@
-import { Container } from "../Container/Container";
-import { Header } from "../Header/Header";
-
+import { Section } from "../Section/Section";
+import css from "./HomePage.module.css";
 export const HomePage = () => {
     return (
-        <Container>
-            <Header />
-            <div>HomePage</div>
-        </Container>
+        <main>
+            <Section hero={true}></Section>
+            <Section title="Popular products">
+                <div>List of popular products with previews</div>
+            </Section>
+        </main>
     );
 };

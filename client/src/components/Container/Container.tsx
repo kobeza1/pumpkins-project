@@ -1,5 +1,15 @@
 import css from "./Container.module.css";
 
-export const Container = ({ children }: { children: any }) => {
-    return <div className={css.container}>{children}</div>;
+export const Container = ({
+    header,
+    children,
+}: {
+    header?: boolean;
+    children: any;
+}) => {
+    return (
+        <div className={header ? css.header__container : css.container}>
+            {children}
+        </div>
+    );
 };

@@ -1,0 +1,24 @@
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav__list {
+    display: flex;
+}
+
+.nav__item {
+    &:not(:last-child) {
+        margin-right: 50px;
+    }
+}
+
+.nav__link {
+    font-size: 20px;
+    padding: 16px 0;
+
+    &:hover,
+    &:focus {
+        color: rgb(255, 130, 30);
+    }
+}
