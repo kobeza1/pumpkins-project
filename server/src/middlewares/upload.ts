@@ -17,6 +17,7 @@ const multerConfig = multer.diskStorage({
     // },
 });
 
+// создание middleware и экспорт
 export const upload = multer({
     storage: multerConfig,
 });

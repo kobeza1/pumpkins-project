@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response) => {
     const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     const avatarURL = gravatar.url(email);
     const verificationToken = v4();
-    const userRole = await RoleModel.findOne({ value: "SUPERADMIN" });
+    const userRole = await RoleModel.findOne({ value: "USER" });
     const newUser = await UserModel.create({
         password: hashPassword,
         email,

@@ -38,6 +38,14 @@ const pumpkinSchema = new Schema(
             type: Boolean,
             default: false,
         },
+        pumpkinURL: {
+            type: String,
+            default: null,
+        },
+        pumpkinCloudinaryID: {
+            type: String,
+            default: null,
+        },
     },
     { versionKey: false }
 );
