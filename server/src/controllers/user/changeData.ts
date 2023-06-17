@@ -1,6 +1,6 @@
 import { v2 as cloudinaryV2 } from "cloudinary";
 import { Response } from "express";
-import { cloudinaryImgUpload } from "../../helpers/index.js";
+import { cloudinaryAvatarUpload } from "../../helpers/index.js";
 import { RequestWithUser } from "../../middlewares/auth.js";
 import { User, UserModel } from "../../models/index.js";
 
@@ -9,7 +9,9 @@ export const changeData = async (req: RequestWithUser, res: Response) => {
     let userIdCloudAvatar = null;
 
     if (req.file) {
-        const { avatarURL, idCloudAvatar } = await cloudinaryImgUpload(req.file);
+        const { avatarURL, idCloudAvatar } = await cloudinaryAvatarUpload(
+            req.file
+        );
         userAvatarURL = avatarURL;
         userIdCloudAvatar = idCloudAvatar;
     }

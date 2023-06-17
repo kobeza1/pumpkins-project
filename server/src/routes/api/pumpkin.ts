@@ -1,14 +1,14 @@
 import express from "express";
 import { ctrlWrapper } from "../../helpers/index.js";
-import { isValidId, validation } from "../../middlewares/index.js";
+import { isValidId, upload, validation } from "../../middlewares/index.js";
 import { pumpkin as ctrl } from "../../controllers/index.js";
 import { schemas } from "../../models/pumpkin.js";
 
 const router = express.Router();
 
-router.get("/", validation(schemas.joiPumpkinSchema), ctrlWrapper(ctrl.getAll));
+router.get("/", ctrlWrapper(ctrl.getAll));
 
-router.post("/", ctrlWrapper(ctrl.addPumpkin));
+router.post("/", upload.single("imageURL"), ctrlWrapper(ctrl.addPumpkin));
 
 router.get("/:id", isValidId, ctrlWrapper(ctrl.getById));
 
