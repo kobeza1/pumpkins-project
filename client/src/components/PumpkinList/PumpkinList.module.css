@@ -1,0 +1,6 @@
+.pumpkin__list {
+    display: grid;
+    /* outline: 1px solid black; */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 60px;
+}

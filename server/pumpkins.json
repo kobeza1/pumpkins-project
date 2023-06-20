@@ -1,0 +1,107 @@
+[
+    {
+        "name": "Casperita",
+        "description": "Small white pumpkin with beautiful ribs",
+        "similars": ["Baby Boo", "Crunchkin"],
+        "color": "white",
+        "size": {
+            "category": "small",
+            "diameter": 15,
+            "minweight": 250,
+            "maxweight": 350
+        },
+        "price": 60
+    },
+    {
+        "name": "Munchkin",
+        "description": "Small orange pumpkin with beautiful ribs",
+        "similars": ["Jil-Be-Little", "Crunchkin"],
+        "color": "orange",
+        "size": {
+            "category": "small",
+            "diameter": 15,
+            "minweight": 250,
+            "maxweight": 350
+        },
+        "price": 60
+    },
+    {
+        "name": "Racer",
+        "description": "Medium to big size pumpkin with perfect shape. Must-have for Halloween.",
+        "similars": ["Expert", "Racer Plus"],
+        "color": "orange",
+        "size": {
+            "category": "big",
+            "diameter": 25,
+            "minweight": 3000,
+            "maxweight": 5000
+        },
+        "price": 150
+    },
+    {
+        "name": "Knuckle Head",
+        "description": "Medium to big size warted pumpkin. Must-have for Halloween.",
+        "similars": [],
+        "color": "orange",
+        "size": {
+            "category": "medium",
+            "diameter": 25,
+            "minweight": 1000,
+            "maxweight": 3000
+        },
+        "price": 150
+    },
+    {
+        "name": "Cinnamon Girl",
+        "description": "Medium perfect shape orange pumpkin. Good for carving.",
+        "similars": ["Rascal"],
+        "color": "orange",
+        "size": {
+            "category": "medium",
+            "diameter": 20,
+            "minweight": 1000,
+            "maxweight": 1500
+        },
+        "price": 100
+    },
+    {
+        "name": "Spark",
+        "description": "Small multicolored pumpkin. Good addition to Casperita and Munchkin.",
+        "similars": ["Munchkin", "Casperita"],
+        "color": "multicolored",
+        "size": {
+            "category": "small",
+            "diameter": 15,
+            "minweight": 150,
+            "maxweight": 350
+        },
+        "price": 100
+    },
+    {
+        "name": "Cargo PMR",
+        "description": "Big upright pumpkin with orange color",
+        "similars": ["Racer"],
+        "color": "orange",
+        "size": {
+            "category": "big",
+            "diameter": 30,
+            "minweight": 5000,
+            "maxweight": 7000
+        },
+        "price": 200
+    },
+
+    {
+        "name": "Grizzly Bear",
+        "description": "Medium warted pumpkin with pale orange color",
+        "similars": ["Knuckle Head"],
+        "color": "orange",
+        "size": {
+            "category": "medium",
+            "diameter": 25,
+            "minweight": 3000,
+            "maxweight": 4000
+        },
+        "price": 150
+    }
+]

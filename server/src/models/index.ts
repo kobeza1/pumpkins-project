@@ -1,5 +1,5 @@
 import { UserModel, type User } from "./user.js";
-import { PumpkinModel } from "./pumpkin.js";
+import { PumpkinModel, type Pumpkin } from "./pumpkin.js";
 import { RoleModel } from "./role.js";
 
-export { UserModel, User, PumpkinModel, RoleModel };
+export { UserModel, User, PumpkinModel, Pumpkin, RoleModel };
