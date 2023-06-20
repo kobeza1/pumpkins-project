@@ -26,6 +26,13 @@ router.patch(
     ctrlWrapper(ctrl.updateFavorite)
 );
 
+router.patch(
+    "/:id/edit",
+    upload.single("imageURL"),
+    validation(schemas.pumpkinUpdateSchema),
+    ctrlWrapper(ctrl.editPumpkin)
+);
+
 router.delete("/:id", isValidId, ctrlWrapper(ctrl.deletePumpkin));
 
 export default router;

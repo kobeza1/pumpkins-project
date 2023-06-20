@@ -1,6 +1,6 @@
 import axios from "axios";
-// const BASE_URL = "https://pumpkins-project.onrender.com";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://pumpkins-project-annq.onrender.com";
+// const BASE_URL = "http://localhost:3000";
 
 let path = "";
 

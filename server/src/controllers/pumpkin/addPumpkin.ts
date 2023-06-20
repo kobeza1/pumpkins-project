@@ -4,10 +4,17 @@ import { cloudinaryImgUpload } from "../../helpers/index.js";
 import { HttpError } from "../../helpers/HttpError.js";
 
 export const addPumpkin = async (req: Request, res: Response) => {
-    let pumpkinURL = null;
-    let pumpkinCloudinaryID = null;
+    let url = null;
+    let id = null;
 
-    const { imageURL, imageCloudinaryID } = await cloudinaryImgUpload(req.file);
+    if (req.file) {
+        const { imageURL, imageCloudinaryID } = await cloudinaryImgUpload(
+            req.file
+        );
+        url = imageURL;
+        id = imageCloudinaryID;
+    }
+
     const { name } = req.body;
     const check = await PumpkinModel.findOne({ name: name });
 
@@ -17,8 +24,8 @@ export const addPumpkin = async (req: Request, res: Response) => {
 
     const result = await PumpkinModel.create({
         ...req.body,
-        pumpkinURL: imageURL,
-        pumpkinCloudinaryID: imageCloudinaryID,
+        imageURL: url,
+        imageID: id,
     });
 
     res.status(201).json({
